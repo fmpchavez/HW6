@@ -12,6 +12,31 @@ body {
     padding-top: 8px;
 }
 
-.search {
-    padding-top: 20px;
+.listcard {
+    width: 80%;
+}
+
+.current-city {
+    border: 1px solid darkcyan;
+    height: 350px;
+}
+
+h4 {
+    justify-content: center;
+    color: darkcyan;
+}
+
+.forecast {
+    border: 1px solid darkcyan;
+    padding-bottom: 20px;
+    height: 370px;
+    text-align: center;
+    justify-content: center;
+}
+
+.foreDay {
+    border: 1px solid white;
+    padding-bottom: 20px;
+    background-color: darkcyan;
+    color: white;
 }

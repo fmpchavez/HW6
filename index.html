@@ -16,20 +16,51 @@
 </head>
 <body>
     <div class="tophead">Weather Dashboard</div>
-    
+    <br/>
+    <br/>
+
+    <div class="container">
+    <div class="row">
+
     <div class="col-md-4 search">
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 search-btn" type="submit">Search</button>
+            <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" id="searchBar" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 search-btn" type="button">Search</button>
         </form>
-    
-        <ul>
+        <br/>
+        <div class="card listcard" style="width: 17rem;">
+            <ul class="list-group list-group-flush cityList">
+              <!-- <li class="list-group-item searchedCity"></li> -->
+            </ul>
+          </div>
+        
+    </div>
 
-        </ul>
+    <div class="col-md-8 card-body text-info current-city">
+        <!-- <img class="icon"></img> -->
+        <h3 class="card-title city"></h3>
+        <p class="card-text temperature"></p>
+        <p class="card-text humidity"></p>
+        <p class="card-text wind"></p>
+        <p class="card-text uv"></p>
+    </div>
     </div>
     
-    
-    
+    <br/>
+
+    <div class="container">
+    <div class="row">
+        <h4>5-DAY FORECAST</h4>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container contFore">
+    <div class="row card-body text-info forecast">
+         
+    </div>
+    </div>
     
     
     <script rel="text/javascript" src="script.js"></script>

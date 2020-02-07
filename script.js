@@ -1,24 +1,21 @@
-// set Event Listener to Search Button when search is initiated
 const history = JSON.parse(localStorage.getItem("cities")) || [];
 
+//setting and initial city once the page is opened
 renderCity("Los Angeles");
 createBtn("Los Angeles");
 
-function clear() {
-    $(".forecast").clear("");
-}
 
+
+// set Event Listener to Search Button when search is initiated
 $(".search-btn").on("click", function () {
     //set variables to initiate API search
     let citySearch = $("#searchBar").val().trim();
     let APIKey = "332531843cc1a103494cbb340f9ec7cd";
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?"+ "q=" + citySearch + "&units=imperial&appid=" + APIKey;
-    //seeting the retrieval of historical search
-    
-    //const history = JSON.parse(localStorage.getItem("cities")) || [];
     
     
-    //function that will run a list of the searched cities
+    
+    
     
     createBtn(citySearch)
     renderCity(citySearch)
@@ -26,13 +23,16 @@ $(".search-btn").on("click", function () {
     
     
 });
-        function createBtn(cityBtn) {
-            // $('.cityList').html('')
-            //for loop to continuously append searched cities
-            if (!history.includes(cityBtn)) {
-                history.unshift(cityBtn);
-                console.log("Hello")
-                localStorage.setItem("cities", JSON.stringify(history));
+
+//function that will run a list of the searched cities
+function createBtn(cityBtn) {
+   
+    //for loop to continuously append searched cities
+    if (!history.includes(cityBtn)) {
+        history.unshift(cityBtn);
+        
+        //seeting the retrieval of historical search
+        localStorage.setItem("cities", JSON.stringify(history));
             }
             if (history.length > 5) {
                 history.pop();
@@ -55,31 +55,30 @@ $(".search-btn").on("click", function () {
             };
         }
 
-        function renderCity(cityFind){
-            
+function renderCity(cityFind){
     
-            let APIKey = "332531843cc1a103494cbb340f9ec7cd";
-            let queryURL = "https://api.openweathermap.org/data/2.5/weather?"+ "q=" + cityFind + "&units=imperial&appid=" + APIKey;
-            // set and href attribute here to make li a link
-            //ajax inquiry for weather API
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function(response) {
-                //variables to retrieve information from the JSON generated
-                let iconKey = response.weather[0].icon;
-                // let genIcon = $("<img>");
-                // let iconURL = "https://openweathermap.org/img/wn/"+iconKey+"@2x.png";
-                let city = $(".city").text(response.name + " " + "(" + (new Date()).toLocaleDateString('en-US') + ")") ;
-                $(".city").append(`<img src='https://openweathermap.org/img/wn/${iconKey}@2x.png'></img>`);
-                let temp = $(".temperature").text("Temperature: " + response.main.temp + " F");
-                let humidity = $(".humidity").text("Humidity: " + response.main.humidity + " %");
-                let wind = $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
+    let APIKey = "332531843cc1a103494cbb340f9ec7cd";
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?"+ "q=" + cityFind + "&units=imperial&appid=" + APIKey;
+    // set and href attribute here to make li a link
+    //ajax inquiry for weather API
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+        //variables to retrieve information from the JSON generated
+            let iconKey = response.weather[0].icon;
+
+            let city = $(".city").text(response.name + " " + "(" + (new Date()).toLocaleDateString('en-US') + ")") ;
+            $(".city").append(`<img src='https://openweathermap.org/img/wn/${iconKey}@2x.png'></img>`);
+            let temp = $(".temperature").text("Temperature: " + response.main.temp + " F");
+            let humidity = $(".humidity").text("Humidity: " + response.main.humidity + " %");
+            let wind = $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
                 
                 //lay down variables for the ajax request for UV Index
                 let lat = response.coord.lat;
                 let lon = response.coord.lon;
                 let uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid="+ APIKey + "&lat=" + lat + "&lon=" + lon;
+                
                 //retrieve UV Index info
                 $.ajax({
                     url: uvURL,
@@ -99,12 +98,10 @@ $(".search-btn").on("click", function () {
                     $(".forecast").empty();
                     for (let i = 0; i < response.list.length; i+=8) {
                         let forecastDate = response.list[i].dt_txt;
-                        // console.log(forecastDate)
                         let kel = response.list[i].main.temp;
                         let forecastTemp = ("Temperature (F): " + (((kel - 273.15) * 1.80 +32)).toFixed(2));
-                        // console.log(forecastTemp)
                         let forecastHumidity = ("Humidity: " + response.list[i].main.humidity + " %");
-                        // console.log(forecastHumidity)
+                        
                         //create elements via template literal
                         let divEl = $(
                             `<div class="col-sm-2 card-body day${i} foreDay">
@@ -117,10 +114,8 @@ $(".search-btn").on("click", function () {
                         $(".forecast").append(divEl);
                             
                     }
-                    // clear()
-                })
-                
-    
+                   
+                })   
                 
             });   
             return
